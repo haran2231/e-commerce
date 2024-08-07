@@ -7,8 +7,8 @@ const Order = require('../models/order'); // Ensure this import is correct
 const transporter = nodemailer.createTransport({
   service: 'Gmail',
   auth: {
-    user: 'haran2231@gmail.com',
-    pass: 'hxty zewp gjuv bhkk',
+    user: '',
+    pass: '',
   },
 });
 
