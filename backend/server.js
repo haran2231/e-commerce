@@ -40,16 +40,16 @@ app.use(cookieParser()); // Add this line to handle cookies
 app.use('/api/products', express.static(path.join(__dirname, 'uploads')));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-// Session setup
-app.use(session({
-  secret: process.env.SESSION_SECRET || 'secret',
-  resave: false,
-  saveUninitialized: false,
-  store: MongoStore.create({
-    mongoUrl: 'mongodb+srv://haran2231:NQyeXBzJuSsH5yrA@cluster0.exawh6u.mongodb.net/e-commerce?retryWrites=true&w=majority', // Ensure this URL is correct
-  }),
-  cookie: { secure: false, maxAge: 60000 } // Session expires in 1 minute
-}));
+// // Session setup
+// app.use(session({
+//   secret: process.env.SESSION_SECRET || 'secret',
+//   resave: false,
+//   saveUninitialized: false,
+//   store: MongoStore.create({
+//     mongoUrl: 'mongodb+srv://haran2231:NQyeXBzJuSsH5yrA@cluster0.exawh6u.mongodb.net/e-commerce?retryWrites=true&w=majority', // Ensure this URL is correct
+//   }),
+//   cookie: { secure: false, maxAge: 60000 } // Session expires in 1 minute
+// }));
 
 // Routes
 app.use('/api/products', productRoutes);
