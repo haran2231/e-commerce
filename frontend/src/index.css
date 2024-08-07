@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.btn:hover{
+    background-color: white;
+    transition-duration: 2s;
+    color: black;
+}
+
+.btn{
+    border: solid black 1px;
+}
+
+.btn2:hover{
+    background-color: transparent;
+    transition-duration: 2s;
+}
+
+.btn2{
+    border: solid rgb(218, 3, 3) 1px;
+}
+
+.menu:hover{
+    color: orange;
+}
+
+.menu:hover{
+    transition-duration: 1s;
+    transform: scale(1.25);
+}
+
+.boy:hover{
+    transition-duration: 1s;
+    transform: scale(0.8);
+}
