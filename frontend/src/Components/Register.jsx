@@ -21,7 +21,7 @@ const Register = () => {
     const handleRegister = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:5000/api/auth/register', formData, { withCredentials: true });
+            const response = await axios.post('https://e-commerce-916t.onrender.com/api/auth/register', formData, { withCredentials: true });
             if (response.status === 200) {
                 navigate('/');
             }

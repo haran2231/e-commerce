@@ -23,7 +23,7 @@ const Header = () => {
             }
 
             try {
-                const response = await axios.get(`http://localhost:5000/api/auth/profile/${userId}`, { withCredentials: true });
+                const response = await axios.get(`https://e-commerce-916t.onrender.com/api/auth/profile/${userId}`, { withCredentials: true });
                 setUser(response.data);
             } catch (error) {
                 console.error('Error fetching user profile', error);
@@ -39,7 +39,7 @@ const Header = () => {
 
     const handleLogout = async () => {
         try {
-            await axios.post('http://localhost:5000/api/auth/logout', {user}, { withCredentials: true });
+            await axios.post('https://e-commerce-916t.onrender.com/api/auth/logout', {user}, { withCredentials: true });
             setUser(null);
             localStorage.removeItem('userId');
             localStorage.removeItem('token');

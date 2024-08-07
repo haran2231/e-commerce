@@ -29,7 +29,7 @@ const Profile = () => {
             if (!userId) {
                 throw new Error('User ID not found');
             }
-            const response = await axios.get(`http://localhost:5000/api/auth/profile/${userId}`, { withCredentials: true });
+            const response = await axios.get(`https://e-commerce-916t.onrender.com/api/auth/profile/${userId}`, { withCredentials: true });
             setUser(response.data);
             setFormData({
                 name: response.data.username || '',
@@ -58,7 +58,7 @@ const Profile = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.put(`http://localhost:5000/api/auth/profile/${userId}`, formData, { withCredentials: true });
+            await axios.put(`https://e-commerce-916t.onrender.com/api/auth/profile/${userId}`, formData, { withCredentials: true });
             alert('Profile updated successfully!');
             fetchUserProfile();
         } catch (error) {

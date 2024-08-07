@@ -38,7 +38,7 @@ const cartReducer = (state, action) => {
 export const CartProvider = ({ children }) => {
   const [state, dispatch] = useReducer(cartReducer, initialState);
   const [loading, setLoading] = useState(true);
-  const baseUrl = 'http://localhost:5000';
+  const baseUrl = 'https://e-commerce-916t.onrender.com';
 
   useEffect(() => {
     const fetchCart = async () => {

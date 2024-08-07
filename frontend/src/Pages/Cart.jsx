@@ -15,7 +15,7 @@ const Cart = () => {
   });
   const [items, setItems] = useState([]);
   const [orderPlaced, setOrderPlaced] = useState(false);
-  const baseUrl = 'http://localhost:5000';
+  const baseUrl = 'https://e-commerce-916t.onrender.com';
 
   // Calculate total cost
   const calculateTotal = () => {
@@ -74,7 +74,7 @@ const Cart = () => {
           ) : (
             items.map((item) => (
               <div key={item._id} className="pb-3 mx-1 mb-2 border border-black">
-                <img src={`http://localhost:5000/${item.productImage}`}  className="h-52" alt={item.productName} />
+                <img src={`https://e-commerce-916t.onrender.com/${item.productImage}`}  className="h-52" alt={item.productName} />
                 <p className="mt-1">{item.productName}</p>
                 <p>Category: {item.category}</p>
                 <p>Colors: {item.color}</p>

@@ -10,7 +10,7 @@ const Login = () => {
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:5000/api/auth/login', { username, password }, { withCredentials: true });
+            const response = await axios.post('https://e-commerce-916t.onrender.com/api/auth/login', { username, password }, { withCredentials: true });
     
             if (response.status === 200) {
                 // Assuming response data contains userId and token

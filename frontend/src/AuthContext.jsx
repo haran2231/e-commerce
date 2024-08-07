@@ -10,7 +10,7 @@ export const AuthProvider = ({ children }) => {
         // Check session or token validity
         const checkAuth = async () => {
             try {
-                await axios.get('http://localhost:5000/api/auth/check', { withCredentials: true });
+                await axios.get('https://e-commerce-916t.onrender.com/api/auth/check', { withCredentials: true });
                 setIsAuthenticated(true);
             } catch (error) {
                 setIsAuthenticated(false);

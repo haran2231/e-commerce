@@ -16,7 +16,7 @@ const Trending = () => {
   const [selectedColor, setSelectedColor] = useState('All');
   const { dispatch } = useContext(CartContext);
 
-  const baseUrl = 'http://localhost:5000';
+  const baseUrl = 'https://e-commerce-916t.onrender.com';
 
   useEffect(() => {
     fetchProducts();

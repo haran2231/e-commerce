@@ -14,7 +14,7 @@ const Login = () => {
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const token = await userCredential.user.getIdToken();
-      await axios.post('http://localhost:5000/login', {}, {
+      await axios.post('https://e-commerce-916t.onrender.com/login', {}, {
         headers: {
           Authorization: `Bearer ${token}`
         }
