@@ -7,13 +7,10 @@ const path = require('path');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser');
-<<<<<<< HEAD
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
-=======
 
 
->>>>>>> 085c0a74e2578315026b865441111cbe5e4f9211
 require('dotenv').config();
 
 const productRoutes = require('./routes/productRoutes');
