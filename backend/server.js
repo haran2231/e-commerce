@@ -31,7 +31,7 @@ connectDB();
 // Middleware
 app.use(bodyParser.json());
 app.use(cors({
-  origin: 'http://localhost:3000', // Change this to your React app's URL
+  origin: 'https://e-commerce-eight-jade.vercel.app/', // Change this to your React app's URL
   credentials: true
 }));
 app.use(cookieParser()); // Add this line to handle cookies
