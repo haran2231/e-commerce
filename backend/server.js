@@ -9,18 +9,15 @@ const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
-
 require('dotenv').config();
 
-
-
 const productRoutes = require('./routes/productRoutes');
-// const userRoutes = require('./routes/userRoutes');
 const productList = require('./routes/productList');
 const { authenticateJWT } = require('./middleware/auth');
 const connectDB = require('./config/db');
-const session = require('express-session');
 const authRoutes = require('./routes/auth');
+const cartRoutes = require('./routes/cart');
+const orderRoutes = require('./routes/order');
 
 // Initialize Express app
 const app = express();
@@ -31,43 +28,33 @@ connectDB();
 
 // Middleware
 app.use(bodyParser.json());
-// app.use(cors());
 app.use(cors({
   origin: 'http://localhost:3000', // Change this to your React app's URL
   credentials: true
 }));
+app.use(cookieParser()); // Add this line to handle cookies
 
+// Serve static files from 'uploads' directory
 app.use('/api/products', express.static(path.join(__dirname, 'uploads')));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-// Routes
-app.use('/api/products', productRoutes);
-app.use('/api/allproducts', productList);
-
-// app.use('/api/users', userRoutes);
-// app.use('/api/cart', require('./routes/cart'));
-// app.use('/api', require('./routes/order'));
-
+// Session setup
 app.use(session({
   secret: process.env.SESSION_SECRET || 'secret',
   resave: false,
   saveUninitialized: false,
+  store: MongoStore.create({
+    mongoUrl: 'mongodb+srv://haran2231:NQyeXBzJuSsH5yrA@cluster0.exawh6u.mongodb.net/e-commerce?retryWrites=true&w=majority', // Ensure this URL is correct
+  }),
   cookie: { secure: false, maxAge: 60000 } // Session expires in 1 minute
 }));
-app.use('/api/auth', authRoutes);
 
 // Routes
-const cartRoutes = require('./routes/cart');
-const orderRoutes = require('./routes/order');
-
+app.use('/api/products', productRoutes);
+app.use('/api/allproducts', productList);
+app.use('/api/auth', authRoutes);
 app.use('/api/cart', cartRoutes);
 app.use('/api', orderRoutes);
-
-// app.use('/api/auth', authRoutes);
-
-
-// Serve static files from 'uploads' directory
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
-app.use(cookieParser()); // Add this line to handle cookies
 
 // Start the server
 app.listen(PORT, () => {
