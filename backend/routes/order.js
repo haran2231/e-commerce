@@ -1,14 +1,14 @@
 const express = require('express');
 const router = express.Router();
 const nodemailer = require('nodemailer');
-const Order = require('../models/order'); // Ensure this import is correct
+const Order = require('../models/Order'); // Ensure this import is correct
 
 // Define your email credentials and transporter
 const transporter = nodemailer.createTransport({
   service: 'Gmail',
   auth: {
-    user: '',
-    pass: '',
+    user: 'haran2231@gmail.com',
+    pass: 'hxty zewp gjuv bhkk',
   },
 });
 
