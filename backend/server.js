@@ -30,10 +30,25 @@ connectDB();
 
 // Middleware
 app.use(bodyParser.json());
-app.use(cors({
-  origin: ['http://localhost:3000', 'https://e-commerce-eight-jade.vercel.app'], // Add your deployed URL here
-  credentials: true
-}));
+// app.use(cors({
+//   origin: ['http://localhost:3000', 'https://e-commerce-eight-jade.vercel.app'], // Add your deployed URL here
+//   credentials: true
+// }));
+
+const allowedOrigins = ['http://localhost:3000', 'https://e-commerce-eight-jade.vercel.app'];
+
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+};
+
+app.use(cors(corsOptions));
+
 app.use(cookieParser()); // Add this line to handle cookies
 
 // Serve static files from 'uploads' directory
