@@ -16,7 +16,7 @@ const Trending = () => {
   const [selectedColor, setSelectedColor] = useState('All');
   const { dispatch } = useContext(CartContext);
 
-  const baseUrl = 'https://e-commerce-916t.onrender.com';
+  // const baseUrl = 'https://e-commerce-916t.onrender.com';
 
   useEffect(() => {
     fetchProducts();
@@ -59,7 +59,7 @@ const Trending = () => {
 
   const fetchProducts = async () => {
     try {
-      const response = await axios.get(`${baseUrl}/api/products`);
+      const response = await axios.get(`https://e-commerce-916t.onrender.com/api/products`);
       setItems(response.data || []);
       console.log('Fetched products:', response.data);
     } catch (error) {
@@ -70,7 +70,7 @@ const Trending = () => {
   const handleAddToCart = async (item) => {
     try {
       console.log('Adding item to cart:', item);
-      await axios.post(`${baseUrl}/api/cart/add`, { item });
+      await axios.post(`https://e-commerce-916t.onrender.com/api/cart/add`, { item });
 
       // Dispatch to context
       dispatch({ type: 'ADD_TO_CART', payload: item });
