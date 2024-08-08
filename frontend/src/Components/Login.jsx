@@ -15,7 +15,7 @@ const Login = () => {
             if (response.status === 200) {
                 // Assuming response data contains userId and token
                 console.log(response.data);
-                const { userId } = response.data;
+                // const { userId, token } = response.data;
     
                 // Store user ID and token in local storage
                 // localStorage.setItem('userId', userId);
