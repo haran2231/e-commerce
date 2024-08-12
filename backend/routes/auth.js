@@ -56,7 +56,7 @@ router.post('/login', async (req, res) => {
     // req.session.userId = user._id;
     res.status(200).json({ 
       message: 'Logged in successfully',
-      // userId: user._id // Send user ID if needed on the frontend
+      userId: user._id // Send user ID if needed on the frontend
     });
   } catch (err) {
     console.error(err.message);
