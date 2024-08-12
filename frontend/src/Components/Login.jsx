@@ -22,7 +22,7 @@ const Login = () => {
                 localStorage.setItem('userId', userId);
                 // localStorage.setItem('token', token); // If you use a token for authentication
     
-                // navigate('/home');
+                navigate('/home');
             }
         } catch (error) {
             console.error('Login failed', error);
