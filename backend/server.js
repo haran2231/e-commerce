@@ -10,7 +10,6 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
 
-
 require('dotenv').config();
 
 const productRoutes = require('./routes/productRoutes');
@@ -30,58 +29,35 @@ connectDB();
 
 // Middleware
 app.use(bodyParser.json());
+app.use(cookieParser()); // Handle cookies
 
-// app.use((req, res, next) => {
-//   console.log('Origin:', req.headers.origin); // Log the incoming request origin
-//   next();
-// });
-
-// const allowedOrigins = [
-// 'http://localhost:3000',
-// 'https://e-commerce-eight-jade.vercel.app'
-// ];
-
+// CORS Middleware
 app.use((req, res, next) => {
-  const allowedOrigins = [
-    'http://localhost:3000',
-    'https://e-commerce-eight-jade.vercel.app'
-  ];
+    const allowedOrigins = [
+        'http://localhost:3000',
+        'https://e-commerce-eight-jade.vercel.app'
+    ];
 
-  const origin = req.headers.origin;
-  if (allowedOrigins.includes(origin)) {
-    res.setHeader('Access-Control-Allow-Origin', origin);
-  }
-  res.setHeader('Access-Control-Allow-Credentials', 'true');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Origin, Content-Type, Accept, Authorization');
-  
-  next();
+    const origin = req.headers.origin;
+    if (allowedOrigins.includes(origin)) {
+        res.setHeader('Access-Control-Allow-Origin', origin);
+    } else {
+        res.setHeader('Access-Control-Allow-Origin', '*'); // Optional: for non-specified origins
+    }
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Origin, Content-Type, Accept, Authorization');
+    
+    if (req.method === 'OPTIONS') {
+        return res.status(200).end(); // Handle pre-flight requests
+    }
+
+    next();
 });
-
-
-// Middleware to log headers being set
-app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', req.headers.origin || '*');
-  console.log('Headers:', res.getHeaders()); // Log the headers being set
-  next();
-});
-
-app.use(cookieParser()); // Add this line to handle cookies
 
 // Serve static files from 'uploads' directory
 app.use('/api/products', express.static(path.join(__dirname, 'uploads')));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
-
-// // Session setup
-// app.use(session({
-//   secret: process.env.SESSION_SECRET || 'secret',
-//   resave: false,
-//   saveUninitialized: false,
-//   store: MongoStore.create({
-//     mongoUrl: 'mongodb+srv://haran2231:NQyeXBzJuSsH5yrA@cluster0.exawh6u.mongodb.net/e-commerce?retryWrites=true&w=majority', // Ensure this URL is correct
-//   }),
-//   cookie: { secure: false, maxAge: 60000 } // Session expires in 1 minute
-// }));
 
 // Routes
 app.use('/api/products', productRoutes);
@@ -92,5 +68,5 @@ app.use('/api', orderRoutes);
 
 // Start the server
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+    console.log(`Server is running on port ${PORT}`);
 });
