@@ -31,8 +31,8 @@ connectDB();
 // Middleware
 app.use(bodyParser.json());
 const allowedOrigins = [
-  'http://localhost:3000',
-  'https://e-commerce-eight-jade.vercel.app'
+  'http://localhost:3000', // Localhost frontend
+  'https://e-commerce-eight-jade.vercel.app' // Deployed frontend on Vercel
 ];
 
 app.use(cors({
