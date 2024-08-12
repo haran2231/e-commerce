@@ -45,15 +45,10 @@ app.use((req, res, next) => {
   console.log('Request Origin:', origin);
 
   // Set CORS headers based on the origin
-  if (origin) {
-    if (allowedOrigins.includes(origin)) {
-      res.setHeader('Access-Control-Allow-Origin', origin);
-    } else {
-      res.setHeader('Access-Control-Allow-Origin', '*'); // Use with caution, consider restricting origins
-    }
+  if (origin && allowedOrigins.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
   } else {
-    console.log('Origin header is missing');
-    res.setHeader('Access-Control-Allow-Origin', '*'); // Allow all if no origin present
+    res.setHeader('Access-Control-Allow-Origin', '*');
   }
 
   // Set other CORS headers
@@ -69,7 +64,6 @@ app.use((req, res, next) => {
   // Pass control to the next middleware
   next();
 });
-
 
 
 
