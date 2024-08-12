@@ -41,16 +41,23 @@ const allowedOrigins = [
 'https://e-commerce-eight-jade.vercel.app'
 ];
 
-app.use(cors({
-origin: function (origin, callback) {
-  if (allowedOrigins.includes(origin) || !origin) {
-    callback(null, true);
-  } else {
-    callback(new Error('Not allowed by CORS'));
+app.use((req, res, next) => {
+  const allowedOrigins = [
+    'http://localhost:3000',
+    'https://e-commerce-eight-jade.vercel.app'
+  ];
+
+  const origin = req.headers.origin;
+  if (allowedOrigins.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
   }
-},
-credentials: true
-}));
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Origin, Content-Type, Accept, Authorization');
+  
+  next();
+});
+
 
 // Middleware to log headers being set
 app.use((req, res, next) => {
