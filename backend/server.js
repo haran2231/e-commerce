@@ -32,31 +32,39 @@ app.use(bodyParser.json());
 app.use(cookieParser()); // Handle cookies
 
 // CORS Middleware
+const allowedOrigins = [
+  'http://localhost:3000',
+  'https://e-commerce-eight-jade.vercel.app'
+];
+
 app.use((req, res, next) => {
   console.log('Request Headers:', req.headers);
+
+  // Get the origin from request headers
   const origin = req.headers.origin;
   console.log('Request Origin:', origin);
 
-  if (origin) {
-      if (allowedOrigins.includes(origin)) {
-          res.setHeader('Access-Control-Allow-Origin', origin);
-      } else {
-          res.setHeader('Access-Control-Allow-Origin', '*');
-      }
+  // Set CORS headers based on the origin
+  if (origin && allowedOrigins.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
   } else {
-      console.log('Origin header is missing');
+    res.setHeader('Access-Control-Allow-Origin', '*');
   }
 
+  // Set other CORS headers
   res.setHeader('Access-Control-Allow-Credentials', 'true');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Origin, Content-Type, Accept, Authorization');
 
+  // Handle pre-flight requests
   if (req.method === 'OPTIONS') {
-      return res.status(200).end();
+    return res.status(204).end(); // Use 204 No Content for pre-flight responses
   }
 
+  // Pass control to the next middleware
   next();
 });
+
 
 
 // Serve static files from 'uploads' directory
