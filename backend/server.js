@@ -32,10 +32,8 @@ app.use(bodyParser.json());
 app.use(cookieParser()); // Handle cookies
 
 // CORS Middleware
-app.use(cors({
-  origin: 'https://e-commerce-eight-jade.vercel.app',
-  credentials: true, // If you need to allow credentials (cookies, authorization headers, etc.)
-}));
+app.use(cors());
+
 
 
 
