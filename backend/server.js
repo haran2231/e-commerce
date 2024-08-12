@@ -32,28 +32,39 @@ app.use(bodyParser.json());
 app.use(cookieParser()); // Handle cookies
 
 // CORS Middleware
+const allowedOrigins = [
+  'http://localhost:3000',
+  'https://e-commerce-eight-jade.vercel.app'
+];
+
 app.use((req, res, next) => {
-    const allowedOrigins = [
-        'http://localhost:3000',
-        'https://e-commerce-eight-jade.vercel.app'
-    ];
+  const origin = req.headers.origin;
 
-    const origin = req.headers.origin;
-    console.log(req.headers.origin);
-    if (allowedOrigins.includes(origin)) {
-        res.setHeader('Access-Control-Allow-Origin', origin);
-    } else {
-        res.setHeader('Access-Control-Allow-Origin', '*'); // Optional: for non-specified origins
-    }
-    res.setHeader('Access-Control-Allow-Credentials', 'true');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Origin, Content-Type, Accept, Authorization');
-    
-    if (req.method === 'OPTIONS') {
-        return res.status(200).end(); // Handle pre-flight requests
-    }
+  // Log the origin for debugging
+  console.log('Request Origin:', origin);
 
-    next();
+  if (origin) {
+      if (allowedOrigins.includes(origin)) {
+          res.setHeader('Access-Control-Allow-Origin', origin);
+      } else {
+          // Optionally handle other origins if needed
+          res.setHeader('Access-Control-Allow-Origin', '*'); // Caution: May allow access from any origin
+      }
+  } else {
+      // If origin is undefined, you might want to handle it or log it
+      console.log('Origin header is missing');
+  }
+
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Origin, Content-Type, Accept, Authorization');
+
+  // Handle pre-flight requests
+  if (req.method === 'OPTIONS') {
+      return res.status(200).end();
+  }
+
+  next();
 });
 
 // Serve static files from 'uploads' directory
