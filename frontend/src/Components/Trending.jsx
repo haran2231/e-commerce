@@ -61,7 +61,7 @@ const Trending = () => {
     try {
       const response = await axios.get(`https://e-commerce-916t.onrender.com/api/products` ,{
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': '*'
         }
       })
       setItems(response.data || []);

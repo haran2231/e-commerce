@@ -32,40 +32,21 @@ app.use(bodyParser.json());
 app.use(cookieParser()); // Handle cookies
 
 // CORS Middleware
-const allowedOrigins = [
-  'http://localhost:3000',
-  'https://e-commerce-eight-jade.vercel.app'
-];
+const allowedOrigins = ['https://e-commerce-eight-jade.vercel.app'];
 
-app.use((req, res, next) => {
-  console.log('Request Headers:', req.headers);
-  console.log(authenticateJWT);
+app.use(cors({
+    origin: function (origin, callback) {
+        // Allow requests with no origin (like mobile apps or curl requests)
+        if (!origin) return callback(null, true);
+        if (allowedOrigins.indexOf(origin) === -1) {
+            const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+            return callback(new Error(msg), false);
+        }
+        return callback(null, true);
+    },
+    credentials: true, // if you need to allow cookies to be sent with requests
+}));
 
-  // Get the origin from request headers
-  const origin = req.headers.origin;
-  console.log('Request Origin:', origin);
-
-  // Set CORS headers based on the origin
-  if (origin && allowedOrigins.includes(origin)) {
-    res.setHeader('Access-Control-Allow-Origin', origin);
-    console.log("allowed");
-  } else {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-  }
-
-  // Set other CORS headers
-  res.setHeader('Access-Control-Allow-Credentials', 'true');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Origin, Content-Type, Accept, Authorization');
-
-  // Handle pre-flight requests
-  if (req.method === 'OPTIONS') {
-    return res.status(204).end(); // Use 204 No Content for pre-flight responses
-  }
-
-  // Pass control to the next middleware
-  next();
-});
 
 
 
