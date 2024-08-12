@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const multer = require('multer');
 const path = require('path');
 const bcrypt = require('bcryptjs');
-// const jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
@@ -14,7 +14,7 @@ require('dotenv').config();
 
 const productRoutes = require('./routes/productRoutes');
 const productList = require('./routes/productList');
-// const { authenticateJWT } = require('./middleware/auth');
+const { authenticateJWT } = require('./middleware/auth');
 const connectDB = require('./config/db');
 const authRoutes = require('./routes/auth');
 const cartRoutes = require('./routes/cart');
@@ -47,6 +47,7 @@ app.use((req, res, next) => {
   // Set CORS headers based on the origin
   if (origin && allowedOrigins.includes(origin)) {
     res.setHeader('Access-Control-Allow-Origin', origin);
+    console.log("allowed");
   } else {
     res.setHeader('Access-Control-Allow-Origin', '*');
   }
