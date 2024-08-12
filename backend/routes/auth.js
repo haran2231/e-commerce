@@ -53,10 +53,10 @@ router.post('/login', async (req, res) => {
       return res.status(400).json({ message: 'Invalid credentials' });
     }
 
-    req.session.userId = user._id;
+    // req.session.userId = user._id;
     res.status(200).json({ 
       message: 'Logged in successfully',
-      userId: user._id // Send user ID if needed on the frontend
+      // userId: user._id // Send user ID if needed on the frontend
     });
   } catch (err) {
     console.error(err.message);
