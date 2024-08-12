@@ -15,10 +15,10 @@ const Login = () => {
             if (response.status === 200) {
                 // Assuming response data contains userId and token
                 console.log(response.data);
-                // const { userId, token } = response.data;
+                const { userId} = response.data;
     
                 // // Store user ID and token in local storage
-                // localStorage.setItem('userId', userId);
+                localStorage.setItem('userId', userId);
                 // localStorage.setItem('token', token); // If you use a token for authentication
     
                 navigate('/home');
