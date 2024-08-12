@@ -3,7 +3,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const router = express.Router();
-const { authenticateJWT } = require('../middleware/auth'); // Ensure correct path
+// const { authenticateJWT } = require('../middleware/auth'); // Ensure correct path
 
 
 // Register Route
@@ -65,7 +65,7 @@ router.post('/login', async (req, res) => {
 });
 
 // Logout Route
-router.post('/logout', authenticateJWT, async (req, res) => {
+router.post('/logout', async (req, res) => {
   // const { user } = req.body;
   console.log("logged out");
   req.session.destroy((err) => {
