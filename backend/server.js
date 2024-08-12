@@ -39,6 +39,7 @@ const allowedOrigins = [
 
 app.use((req, res, next) => {
   console.log('Request Headers:', req.headers);
+  console.log(authenticateJWT);
 
   // Get the origin from request headers
   const origin = req.headers.origin;
