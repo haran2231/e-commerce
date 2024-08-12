@@ -31,7 +31,7 @@ connectDB();
 // Middleware
 app.use(bodyParser.json());
 app.use(cors({
-  origin:  'https://e-commerce-eight-jade.vercel.app', // Add your deployed URL here
+  origin:  'http://e-commerce-eight-jade.vercel.app', // Add your deployed URL here
   credentials: true
 }));
 app.use(cookieParser()); // Add this line to handle cookies
