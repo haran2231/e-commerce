@@ -32,26 +32,18 @@ app.use(bodyParser.json());
 app.use(cookieParser()); // Handle cookies
 
 // CORS Middleware
-const allowedOrigins = [
-  'http://localhost:3000',
-  'https://e-commerce-eight-jade.vercel.app'
-];
-
 app.use((req, res, next) => {
+  console.log('Request Headers:', req.headers);
   const origin = req.headers.origin;
-
-  // Log the origin for debugging
   console.log('Request Origin:', origin);
 
   if (origin) {
       if (allowedOrigins.includes(origin)) {
           res.setHeader('Access-Control-Allow-Origin', origin);
       } else {
-          // Optionally handle other origins if needed
-          res.setHeader('Access-Control-Allow-Origin', '*'); // Caution: May allow access from any origin
+          res.setHeader('Access-Control-Allow-Origin', '*');
       }
   } else {
-      // If origin is undefined, you might want to handle it or log it
       console.log('Origin header is missing');
   }
 
@@ -59,13 +51,13 @@ app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Origin, Content-Type, Accept, Authorization');
 
-  // Handle pre-flight requests
   if (req.method === 'OPTIONS') {
       return res.status(200).end();
   }
 
   next();
 });
+
 
 // Serve static files from 'uploads' directory
 app.use('/api/products', express.static(path.join(__dirname, 'uploads')));
