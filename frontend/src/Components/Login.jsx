@@ -11,7 +11,7 @@ const Login = () => {
         e.preventDefault();
         try {
             const response = await axios.post('https://e-commerce-916t.onrender.com/api/auth/login', { username, password }, { withCredentials: true });
-    
+            console.log(response.data);
             if (response.status === 200) {
                 // Assuming response data contains userId and token
                 console.log(response.data);
