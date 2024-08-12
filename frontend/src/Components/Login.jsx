@@ -16,6 +16,7 @@ const Login = () => {
                 // Assuming response data contains userId and token
                 console.log(response.data);
                 const { userId} = response.data;
+                console.log(userId);
     
                 // // Store user ID and token in local storage
                 localStorage.setItem('userId', userId);
