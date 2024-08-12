@@ -61,8 +61,7 @@ const Trending = () => {
     try {
       const response = await axios.get(`https://e-commerce-916t.onrender.com/api/products` ,{
         headers: {
-          'Content-Type': 'application/json',
-          'Origin': 'https://e-commerce-eight-jade.vercel.app/'
+          'Content-Type': 'application/json'
         }
       })
       setItems(response.data || []);
