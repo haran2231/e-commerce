@@ -31,15 +31,15 @@ connectDB();
 // Middleware
 app.use(bodyParser.json());
 
-app.use((req, res, next) => {
-  console.log('Origin:', req.headers.origin); // Log the incoming request origin
-  next();
-});
+// app.use((req, res, next) => {
+//   console.log('Origin:', req.headers.origin); // Log the incoming request origin
+//   next();
+// });
 
-const allowedOrigins = [
-'http://localhost:3000',
-'https://e-commerce-eight-jade.vercel.app'
-];
+// const allowedOrigins = [
+// 'http://localhost:3000',
+// 'https://e-commerce-eight-jade.vercel.app'
+// ];
 
 app.use((req, res, next) => {
   const allowedOrigins = [
@@ -60,11 +60,11 @@ app.use((req, res, next) => {
 
 
 // Middleware to log headers being set
-app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', req.headers.origin || '*');
-  console.log('Headers:', res.getHeaders()); // Log the headers being set
-  next();
-});
+// app.use((req, res, next) => {
+//   res.setHeader('Access-Control-Allow-Origin', req.headers.origin || '*');
+//   console.log('Headers:', res.getHeaders()); // Log the headers being set
+//   next();
+// });
 
 app.use(cookieParser()); // Add this line to handle cookies
 
